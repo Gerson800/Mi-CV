@@ -1,180 +1,836 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <meta name="description" content="Portafolio de CV online - Diseño moderno y responsivo para desarrolladores">
-  <title>CV Online | Gerson Antifis Amador</title>
-  <!-- Fuentes e iconos -->
-  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <!-- Estilos principales -->
-  <link rel="stylesheet" href="style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gerson Antifis Amador — CV</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: oklch(97% 0.008 295);
+      --bg-card: #ffffff;
+      --ink: oklch(20% 0.015 280);
+      --ink-soft: oklch(45% 0.015 280);
+      --ink-muted: oklch(65% 0.012 280);
+      --violet: oklch(52% 0.18 295);
+      --violet-soft: oklch(88% 0.06 295);
+      --violet-deep: oklch(38% 0.16 295);
+      --violet-glow: oklch(92% 0.04 295);
+      --line: oklch(88% 0.01 280);
+      --serif: 'Fraunces', Georgia, serif;
+      --sans: 'Inter', system-ui, sans-serif;
+      --mono: 'JetBrains Mono', ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--sans);
+      color: var(--ink);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
+    }
+    a { color: inherit; text-decoration: none; }
+
+    /* ────── Nav ────── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 18px 40px;
+      background: oklch(97% 0.008 295 / 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+    .topbar .mark {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      color: var(--ink-muted);
+      display: flex; align-items: center; gap: 10px;
+    }
+    .topbar .mark::before {
+      content: ''; width: 16px; height: 1.5px; background: var(--violet);
+    }
+    .topbar nav {
+      display: flex; gap: 6px; align-items: center;
+    }
+    .topbar nav a {
+      padding: 8px 14px;
+      font-size: 13px; font-weight: 500;
+      color: var(--ink-soft);
+      border-radius: 6px;
+      transition: all 150ms;
+    }
+    .topbar nav a:hover { color: var(--ink); background: var(--violet-glow); }
+    .topbar nav a.cta {
+      background: var(--violet);
+      color: #fff;
+      margin-left: 8px;
+    }
+    .topbar nav a.cta:hover { background: var(--violet-deep); color: #fff; }
+
+    /* ────── Hero ────── */
+    .hero {
+      position: relative;
+      padding: 180px 40px 120px;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      pointer-events: none;
+      background:
+        radial-gradient(ellipse 60% 50% at 85% 20%, var(--violet-glow) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 40% at 10% 90%, oklch(94% 0.03 310) 0%, transparent 60%);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(to right, oklch(90% 0.01 280 / 0.3) 1px, transparent 1px),
+        linear-gradient(to bottom, oklch(90% 0.01 280 / 0.3) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: radial-gradient(ellipse at center, black 30%, transparent 70%);
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 1200px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 280px;
+      gap: 80px;
+      align-items: center;
+    }
+    .hero .num {
+      position: absolute;
+      top: 40px; right: -40px;
+      font-family: var(--serif);
+      font-size: 420px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--violet-soft);
+      opacity: 0.35;
+      line-height: 0.85;
+      letter-spacing: -0.04em;
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-label {
+      font-family: var(--mono); font-size: 12px;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--violet);
+      margin-bottom: 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .hero-label::before {
+      content: ''; width: 40px; height: 2px; background: var(--violet);
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(64px, 9vw, 140px);
+      font-weight: 400;
+      line-height: 0.92;
+      letter-spacing: -0.04em;
+      color: var(--ink);
+      margin-bottom: 36px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--violet);
+    }
+    .role-chips { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; margin-bottom: 40px; }
+    .chip {
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 7px 14px;
+      border-radius: 4px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-weight: 500;
+    }
+    .chip.dark { background: var(--ink); color: var(--bg); }
+    .chip.violet { background: var(--violet); color: #fff; }
+    .chip-plus { color: var(--ink-muted); font-size: 18px; font-family: var(--serif); }
+
+    .hero-lead {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--ink-soft);
+      max-width: 680px;
+      letter-spacing: -0.005em;
+    }
+    .hero-lead em { color: var(--violet); font-weight: 400; font-style: normal; }
+
+    .hero-photo {
+      position: relative; z-index: 1;
+      aspect-ratio: 3/4;
+      background: repeating-linear-gradient(135deg, oklch(90% 0.03 295) 0 10px, oklch(85% 0.04 295) 10px 20px);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      flex-direction: column;
+      gap: 10px;
+      color: var(--violet-deep);
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 40px oklch(52% 0.18 295 / 0.15);
+      overflow: hidden;
+    }
+    .hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .hero-photo .ph-label {
+      padding: 6px 12px; background: rgba(255,255,255,0.7); border-radius: 3px;
+    }
+
+    /* ────── Sections ────── */
+    .section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 100px 40px;
+      border-bottom: 1px solid var(--line);
+    }
+    .section-head {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 60px;
+      margin-bottom: 60px;
+      align-items: start;
+    }
+    .section-num {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--violet);
+      padding-top: 14px;
+      position: sticky; top: 100px;
+    }
+    .section-num::before {
+      content: ''; display: block;
+      width: 20px; height: 2px;
+      background: var(--violet);
+      margin-bottom: 14px;
+    }
+    .section h2 {
+      font-family: var(--serif);
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 400;
+      line-height: 1;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+    }
+    .section h2 em {
+      font-style: italic; font-weight: 300; color: var(--violet);
+    }
+    .section-body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 60px;
+    }
+    .section-body > .spacer { display: block; }
+
+    /* About */
+    .about-text {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 300;
+      line-height: 1.45;
+      color: var(--ink-soft);
+      letter-spacing: -0.01em;
+      max-width: 860px;
+    }
+    .about-text em { color: var(--violet); font-weight: 400; font-style: normal; }
+    .about-quote {
+      margin-top: 40px;
+      padding-left: 24px;
+      border-left: 2px solid var(--violet);
+      font-family: var(--serif);
+      font-style: italic;
+      font-size: 19px;
+      color: var(--ink-soft);
+      max-width: 640px;
+    }
+
+    /* Skills */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+    .skill-card {
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 22px;
+      transition: all 200ms;
+    }
+    .skill-card:hover {
+      border-color: var(--violet);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px oklch(52% 0.18 295 / 0.08);
+    }
+    .skill-card .cat {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-bottom: 14px;
+    }
+    .skill-card .name {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--ink);
+      margin-bottom: 18px;
+      letter-spacing: -0.02em;
+    }
+    .skill-card .bar {
+      height: 3px;
+      background: var(--line);
+      border-radius: 2px;
+      overflow: hidden;
+      position: relative;
+    }
+    .skill-card .bar > div {
+      height: 100%;
+      background: var(--violet);
+      border-radius: 2px;
+      transform-origin: left;
+      animation: fillBar 1s ease-out both;
+    }
+    @keyframes fillBar {
+      from { transform: scaleX(0); }
+    }
+
+    /* Experience */
+    .timeline { position: relative; }
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 7px; top: 10px; bottom: 10px;
+      width: 2px;
+      background: var(--violet-soft);
+    }
+    .xp {
+      position: relative;
+      padding-left: 48px;
+      padding-bottom: 40px;
+    }
+    .xp:last-child { padding-bottom: 0; }
+    .xp::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 8px;
+      width: 16px; height: 16px;
+      background: var(--violet);
+      border: 3px solid var(--bg);
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px var(--violet);
+    }
+    .xp-head {
+      display: flex; justify-content: space-between;
+      align-items: baseline; gap: 20px; flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .xp-role {
+      font-family: var(--serif);
+      font-size: 30px; font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+    }
+    .xp-role .org {
+      font-style: italic; font-weight: 300; color: var(--ink-muted);
+    }
+    .xp-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 4px 10px;
+      background: var(--violet-soft);
+      color: var(--violet-deep);
+      border-radius: 4px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .xp-desc {
+      font-size: 16px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      max-width: 780px;
+    }
+
+    /* Education grid */
+    .edu-langs {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 40px;
+    }
+    .subgroup h3 {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    .edu-item {
+      padding: 20px 24px;
+      background: var(--bg-card);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .edu-item .t {
+      font-family: var(--serif);
+      font-size: 20px; font-weight: 500;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+    }
+    .edu-item .s {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-muted);
+      margin-top: 4px;
+    }
+    .lang {
+      margin-bottom: 24px;
+    }
+    .lang-top {
+      display: flex; justify-content: space-between;
+      align-items: baseline; margin-bottom: 8px;
+    }
+    .lang-name { font-family: var(--serif); font-size: 22px; font-weight: 500; }
+    .lang-lvl {
+      font-family: var(--mono); font-size: 11px;
+      color: var(--violet); letter-spacing: 0.18em; text-transform: uppercase;
+    }
+    .lang-bar { display: flex; gap: 4px; }
+    .lang-bar > div {
+      flex: 1; height: 4px;
+      background: var(--line); border-radius: 1px;
+    }
+    .lang-bar > div.on { background: var(--violet); }
+
+    /* Soft skills */
+    .soft-skills {
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px dashed var(--line);
+    }
+    .soft-skills h3 {
+      font-family: var(--serif);
+      font-size: 28px; font-weight: 500;
+      margin-bottom: 24px;
+      letter-spacing: -0.02em;
+    }
+    .tags { display: flex; flex-wrap: wrap; gap: 10px; }
+    .tag {
+      font-size: 14px; font-weight: 500;
+      color: var(--ink);
+      padding: 9px 16px;
+      border: 1px solid var(--ink);
+      border-radius: 100px;
+      transition: all 150ms;
+    }
+    .tag:hover {
+      background: var(--ink); color: var(--bg);
+    }
+
+    /* Contact */
+    #contact {
+      background: var(--ink);
+      color: var(--bg);
+      border-bottom: none;
+      position: relative;
+      overflow: hidden;
+    }
+    #contact::before {
+      content: '';
+      position: absolute;
+      right: -200px; top: -200px;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, var(--violet), transparent 70%);
+      opacity: 0.5;
+      pointer-events: none;
+    }
+    #contact .section-num { color: var(--violet); }
+    #contact h2 { color: var(--bg); }
+    #contact h2 em { color: var(--violet); }
+    #contact .contact-body { position: relative; z-index: 1; }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      margin-bottom: 48px;
+    }
+    .contact-item .lbl {
+      font-family: var(--mono); font-size: 11px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: oklch(70% 0.01 280); margin-bottom: 8px;
+    }
+    .contact-item .val {
+      font-family: var(--sans); font-size: 20px; font-weight: 500;
+      color: var(--bg);
+      word-break: break-word;
+    }
+    .contact-item a.val:hover { color: var(--violet); }
+    .social-links {
+      display: flex; gap: 12px; flex-wrap: wrap;
+    }
+    .social-link {
+      padding: 14px 22px;
+      border: 1px solid var(--violet);
+      border-radius: 100px;
+      display: flex; align-items: center; gap: 12px;
+      transition: all 150ms;
+    }
+    .social-link:hover {
+      background: var(--violet);
+    }
+    .social-link .l {
+      font-family: var(--mono); font-size: 10px;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--violet);
+      transition: color 150ms;
+    }
+    .social-link:hover .l { color: #fff; }
+    .social-link .u { font-size: 14px; color: var(--bg); }
+
+    footer {
+      max-width: 1200px; margin: 0 auto;
+      padding: 30px 40px;
+      display: flex; justify-content: space-between;
+      font-family: var(--mono); font-size: 11px;
+      color: var(--ink-muted); letter-spacing: 0.16em; text-transform: uppercase;
+    }
+
+    /* Entry reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+      .topbar { padding: 14px 20px; }
+      .topbar .mark { display: none; }
+      .hero { padding: 130px 20px 80px; }
+      .hero-inner { grid-template-columns: 1fr; gap: 40px; }
+      .hero-photo { max-width: 280px; aspect-ratio: 4/3; }
+      .hero .num { font-size: 240px; right: -10px; top: 80px; }
+      .section { padding: 70px 20px; }
+      .section-head, .section-body { grid-template-columns: 1fr; gap: 20px; }
+      .section-num { position: static; }
+      .skills-grid { grid-template-columns: repeat(2, 1fr); }
+      .edu-langs { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 10px; text-align: center; }
+    }
+  </style>
 </head>
 <body>
-  <div class="cv-container">
-    <!-- COLUMNA IZQUIERDA (PERFIL + CONTACTO + SKILLS) -->
-    <aside class="sidebar" aria-label="Información personal y contacto">
-      <div class="perfil">
-        <figure class="avatar">
-          <i class="fas fa-code" aria-hidden="true"></i>
-        </figure>
-        <h1 class="nombre">Gerson Antifis Amador</h1>
-        <p class="titulo">Desarrollador Full Stack & Soporte TI</p>
-        <p class="descripcion-corta">
-          Creativo, resolutivo y apasionado por construir experiencias digitales funcionales. + 1 año creando soluciones web escalables.
-        </p>
-      </div>
 
-      <section class="info-contacto">
-        <h2><i class="fas fa-address-card" aria-hidden="true"></i> Contacto</h2>
-        <address>
-          <ul class="contact-list">
-            <li><i class="fas fa-phone-alt"></i> <a href="tel:+1 (809) 702-3335">+1 (809) 702-3335</a></li>
-            <li><i class="fas fa-envelope"></i> <a href="mailto:antifisgerson@gmail.com">antifisgerson@gmail.com</a></li>
-            <li><i class="fas fa-map-marker-alt"></i> Santo Domingo, República Dominicana</li>
-            <li><i class="fab fa-github"></i> <a href="#">github.com/Gerson800</a></li>
-          <!-- <li><i class="fab fa-linkedin"></i> <a href="#">linkedin.com/in/antifisgerson</a></li>--> 
-          </ul>
-        </address>
-      </section>
-
-      <section class="skills">
-        <h2><i class="fas fa-cogs"></i> Habilidades técnicas</h2>
-        <div class="skill-item">
-          <div class="skill-name"><span>JavaScript / TypeScript</span><span>90%</span></div>
-          <div class="progress-bar"><div class="progress" style="width: 90%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-name"><span>C#</span><span>80%</span></div>
-          <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-name"><span>Lógicade programación</span><span>80%</span></div>
-          <div class="progress-bar"><div class="progress" style="width: 80%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-name"><span>HTML5 / CSS3 </span><span>92%</span></div>
-          <div class="progress-bar"><div class="progress" style="width: 92%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-name"><span>Soporte TI</span><span>70%</span></div>
-          <div class="progress-bar"><div class="progress" style="width: 70%"></div></div>
-        </div>
-        <div class="skill-item">
-          <div class="skill-name"><span>SQL / SQL Server</span><span>75%</span></div>
-          <div class="progress-bar"><div class="progress" style="width: 75%"></div></div>
-        </div>
-      </section>
-
-      <section class="idiomas">
-        <h2><i class="fas fa-language"></i> Idiomas</h2>
-        <ul class="idioma-list">
-          <li><span>Español (Nativo)</span><span class="idioma-nivel">C2</span></li>
-          <li><span>Inglés</span><span class="idioma-nivel">Intermedio (B2)</span></li>
-          <!--<li><span>Francés</span><span class="idioma-nivel">Intermedio (B1)</span></li>-->
-        </ul>
-      </section>
-    </aside>
-
-    <!-- COLUMNA DERECHA: CONTENIDO PRINCIPAL -->
-    <main class="main-content">
-      <section class="seccion">
-        <h2>Sobre mí</h2>
-        <p class="card-text">
-          Estudiante de Desarrollo y Diseño de Software con conocimientos en programación, bases de datos y soporte técnico. 
-          Me caracterizo por mi pensamiento lógico, capacidad para resolver problemas y rápida adaptación a nuevas tecnologías. 
-          Busco desarrollarme como programador en un entorno profesional donde pueda aplicar y fortalecer mis habilidades.
-        </p>
-        <div class="skills-tag">
-          <span class="skill-tag">Trabajo en equipo</span>
-          <span class="skill-tag">Liderazgo técnico</span>
-          <span class="skill-tag">Pensamiento lógico</span>
-          <span class="skill-tag">UX básico</span>
-        </div>
-      </section>
-
-      <section class="seccion">
-        <h2>Experiencia profesional</h2>
-        <article class="card">
-          <header class="card-header">
-            <h3 class="card-title">Desarrollo de Software</h3>
-            <span class="card-date">2024 - Actualidad</span>
-          </header>
-          <p class="card-sub">Instituto Nacional de Formación Técnico Profesional · Santo Domingo</p>
-          <p class="card-text">
-            Desarrollo de aplicaciones y soluciones tecnológicas mediante programación. Manejo de lenguajes como C# y JavaScript, aplicando lógica de programación, estructuras básicas de datos y buenas prácticas de desarrollo.
-          </p>
-        </article>
-        <article class="card">
-          <header class="card-header">
-            <h3 class="card-title">Redes Informáticas (Prácticas)</h3>
-            <span class="card-date">2025 - 2026</span>
-          </header>
-          <p class="card-sub">Instituto Nacional de Formación Técnico Profesional · Santo Domingo</p>
-          <p class="card-text">
-            Conocimientos básicos en redes de computadoras, incluyendo conceptos fundamentales como direccionamiento IP, conexión de dispositivos, configuración básica de redes locales (LAN) y comprensión de cómo se comunican los equipos dentro de una red.
-          </p>
-        </article>
-        <article class="card">
-          <header class="card-header">
-            <h3 class="card-title">Desarrolladora Web </h3>
-            <span class="card-date">2025 - 2026</span>
-          </header>
-          <p class="card-sub">Instituto Nacional de Formación Técnico Profesional · Santo Domingo</p>
-          <p class="card-text">
-            Desarrollo de sitios web con HTML5, CSS3 y JS vanilla. Optimización SEO y rendimiento, migración de sitios a WordPress personalizado. Soporte técnico y mejora de accesibilidad web.
-          </p>
-        </article>
-      </section>
-
-      <section class="seccion">
-        <h2>Formación académica</h2>
-        <article class="card">
-          <header class="card-header">
-            <h3 class="card-title">Tecnico en Desarrollo de Software</h3>
-            <span class="card-date">2025 - 2026</span>
-          </header>
-          <p class="card-sub">Instituto Nacional de Formación Técnico Profesional · Santo Domingo</p>
-          <p class="card-text">El programa forma en el desarrollo de aplicaciones y sistemas de software, combinando programación, bases de datos y herramientas tecnológicas para la creación de soluciones informáticas.</p>
-        </article>
-        <article class="card">
-          <header class="card-header">
-            <h3 class="card-title">Instituto de Ingles</h3>
-            <span class="card-date">2023 - 2026</span>
-          </header>
-          <p class="card-sub">Los Angeles Institute</p>
-          <p class="card-text">Formación en el idioma inglés enfocada en el desarrollo de habilidades básicas de comunicación oral y escrita. Incluye comprensión de textos simples, vocabulario esencial, gramática básica y construcción de oraciones.</p>
-        </article>
-      </section>
-
-      <section class="seccion">
-        <h2>Proyectos destacados</h2>
-        <div class="project-item">
-          <h3 class="project-title"><i class="fab fa-react"></i> Pagina Web de Salon</h3>
-          <p class="card-text">Sitio web para un salón de belleza, con diseño responsive y funcionalidades de reserva de citas. </p>
-          <div class="skills-tag"><span class="skill-tag">JavaScript</span><span class="skill-tag">PHP</span><span class="skill-tag">CSS</span></div>
-        </div>
-        <div class="project-item">
-          <h3 class="project-title"><i class="fas fa-chart-line"></i> Panel de Control Analytics</h3>
-          <p class="card-text">Aplicación de escritorio para registrar y analizar los estudiantes que entran a una escuela, donde pueden inicial sesion y poder elegir las materias que van a tener.</p>
-          <div class="skills-tag"><span class="skill-tag">C#</span><span class="skill-tag">SQL Server</span><span class="skill-tag">APIs</span></div>
-        </div>
-        <div class="project-item">
-          <h3 class="project-title"><i class="fas fa-mobile-alt"></i> Citas medicas</h3>
-          <p class="card-text">Aplicación de escritorio para agendar citas médicas, con funcionalidades de registro de usuarios y gestión de horarios.</p>
-          <div class="skills-tag"><span class="skill-tag">C#</span><span class="skill-tag">SQL Server</span><span class="skill-tag">ASP.NET</span></div>
-        </div>
-      </section>
-
-      <div class="pdf-button-wrapper">
-        <button class="btn-pdf" id="downloadPDFBtn">
-          <i class="fas fa-download"></i> Descargar CV (PDF)
-        </button>
-      </div>
-    </main>
+  <div class="topbar">
+    <div class="mark">CV · Gerson A. · 2026</div>
+    <nav>
+      <a href="#about">Sobre mí</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experiencia</a>
+      <a href="#education">Formación</a>
+      <a href="#contact">Contacto</a>
+      <a class="cta" href="cv-print.html" target="_blank">Descargar PDF</a>
+    </nav>
   </div>
 
-  <script src="script.js"></script>
+  <!-- ─── HERO ─── -->
+  <header class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-grid"></div>
+    <div class="num">01</div>
+
+    <div class="hero-inner">
+      <div class="hero-content">
+        <div class="hero-label">Curriculum Vitae</div>
+        <h1>Gerson <em>Antifis</em><br/>Amador</h1>
+
+        <div class="role-chips">
+          <span class="chip dark">Soporte TI</span>
+          <span class="chip-plus">+</span>
+          <span class="chip violet">Desarrollador Web</span>
+        </div>
+
+        <p class="hero-lead">
+          Desarrollo y diseño de software con conocimientos en <em>programación</em>,
+          <em>bases de datos</em> y <em>soporte técnico</em>. Busco crecer como
+          programador en un entorno profesional.
+        </p>
+      </div>
+
+      <div class="hero-photo">
+        <img src="img/Gerson (1).png" alt="Gerson Antifis Amador"/>
+      </div>
+    </div>
+  </header>
+
+  <!-- ─── ABOUT ─── -->
+  <section id="about" class="section">
+    <div class="section-head reveal">
+      <div class="section-num">02 — Sobre mí</div>
+      <h2>Lógica, código y <em>curiosidad técnica.</em></h2>
+    </div>
+    <div class="section-body reveal">
+      <div class="spacer"></div>
+      <div>
+        <p class="about-text">
+          Me caracterizo por mi <em>pensamiento lógico</em>, capacidad para resolver
+          problemas y rápida adaptación a nuevas tecnologías. Combino el soporte
+          técnico con el desarrollo web y el diseño de software.
+        </p>
+        <div class="about-quote">
+          Busco desarrollarme como programador en un entorno profesional donde
+          pueda aplicar y fortalecer mis habilidades.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── SKILLS ─── -->
+  <section id="skills" class="section">
+    <div class="section-head reveal">
+      <div class="section-num">03 — Habilidades</div>
+      <h2>Stack <em>de trabajo.</em></h2>
+    </div>
+    <div class="section-body reveal">
+      <div class="spacer"></div>
+      <div class="skills-grid">
+        <div class="skill-card">
+          <div class="cat">Lenguaje</div>
+          <div class="name">C++</div>
+          <div class="bar"><div style="width: 78%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Lenguaje</div>
+          <div class="name">C#</div>
+          <div class="bar"><div style="width: 82%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Runtime</div>
+          <div class="name">Node.js</div>
+          <div class="bar"><div style="width: 75%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Markup</div>
+          <div class="name">HTML</div>
+          <div class="bar"><div style="width: 92%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Styling</div>
+          <div class="name">CSS</div>
+          <div class="bar"><div style="width: 88%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Lenguaje</div>
+          <div class="name">JavaScript</div>
+          <div class="bar"><div style="width: 85%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Base de datos</div>
+          <div class="name">SQL</div>
+          <div class="bar"><div style="width: 80%"></div></div>
+        </div>
+        <div class="skill-card">
+          <div class="cat">Tools</div>
+          <div class="name">Office 365</div>
+          <div class="bar"><div style="width: 90%"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EXPERIENCE ─── -->
+  <section id="experience" class="section">
+    <div class="section-head reveal">
+      <div class="section-num">04 — Experiencia</div>
+      <h2>Trayectoria <em>profesional.</em></h2>
+    </div>
+    <div class="section-body reveal">
+      <div class="spacer"></div>
+      <div class="timeline">
+
+        <div class="xp">
+          <div class="xp-head">
+            <div class="xp-role">Programador Independiente <span class="org">· Freelance</span></div>
+            <span class="xp-tag">En curso</span>
+          </div>
+          <p class="xp-desc">
+            Desarrollo de proyectos de software personalizados y blogs de tecnología.
+            Implementación de soluciones digitales y mantenimiento de plataformas web
+            para clientes particulares.
+          </p>
+        </div>
+
+        <div class="xp">
+          <div class="xp-head">
+            <div class="xp-role">Colaborador Logística <span class="org">· Grupo Ramos</span></div>
+            <span class="xp-tag">Operaciones</span>
+          </div>
+          <p class="xp-desc">
+            Control de inventario y organización logística de mercancía en almacén.
+            Gestión de entrada y salida de productos y verificación de calidad.
+          </p>
+        </div>
+
+        <div class="xp">
+          <div class="xp-head">
+            <div class="xp-role">Pasantía — Área de Sistemas <span class="org">· Ayuntamiento de Pantoja</span></div>
+            <span class="xp-tag">TI</span>
+          </div>
+          <p class="xp-desc">
+            Desarrollo de aplicaciones internas y soporte técnico al área de sistemas.
+            Colaboración en la gestión y mantenimiento de bases de datos locales.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── EDUCATION + LANGUAGES + SOFT SKILLS ─── -->
+  <section id="education" class="section">
+    <div class="section-head reveal">
+      <div class="section-num">05 — Formación</div>
+      <h2>Formación &<br/><em>aptitudes.</em></h2>
+    </div>
+    <div class="section-body reveal">
+      <div class="spacer"></div>
+      <div>
+        <div class="edu-langs">
+          <div class="subgroup">
+            <h3>Formación académica</h3>
+            <div class="edu-item">
+              <div class="t">Desarrollo y Diseño de Software</div>
+              <div class="s">Especialidad técnica</div>
+            </div>
+            <div class="edu-item">
+              <div class="t">Informática</div>
+              <div class="s">Formación general</div>
+            </div>
+            <div class="edu-item">
+              <div class="t">Inglés</div>
+              <div class="s">Curso de idioma</div>
+            </div>
+          </div>
+
+          <div class="subgroup">
+            <h3>Idiomas</h3>
+            <div class="lang">
+              <div class="lang-top">
+                <span class="lang-name">Español</span>
+                <span class="lang-lvl">Nativo</span>
+              </div>
+              <div class="lang-bar">
+                <div class="on"></div><div class="on"></div><div class="on"></div><div class="on"></div><div class="on"></div>
+              </div>
+            </div>
+            <div class="lang">
+              <div class="lang-top">
+                <span class="lang-name">Inglés</span>
+                <span class="lang-lvl">Intermedio</span>
+              </div>
+              <div class="lang-bar">
+                <div class="on"></div><div class="on"></div><div class="on"></div><div class="on"></div><div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="soft-skills">
+          <h3>Aptitudes personales</h3>
+          <div class="tags">
+            <span class="tag">Trabajo en equipo</span>
+            <span class="tag">Comunicación</span>
+            <span class="tag">Adaptabilidad</span>
+            <span class="tag">Liderazgo</span>
+            <span class="tag">Pensamiento crítico</span>
+            <span class="tag">Atención al detalle</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─── CONTACT ─── -->
+  <section id="contact" class="section">
+    <div class="section-head reveal">
+      <div class="section-num">06 — Hablemos</div>
+      <h2>Listo para <em>colaborar.</em></h2>
+    </div>
+    <div class="section-body reveal contact-body">
+      <div class="spacer"></div>
+      <div>
+        <div class="contact-grid">
+          <div class="contact-item">
+            <div class="lbl">Email</div>
+            <a class="val" href="mailto:antifisgerson@gmail.com">antifisgerson@gmail.com</a>
+          </div>
+          <div class="contact-item">
+            <div class="lbl">Teléfono</div>
+            <a class="val" href="tel:+18097023335">+1 809-702-3335</a>
+          </div>
+          <div class="contact-item">
+            <div class="lbl">Ubicación</div>
+            <div class="val">Santo Domingo Oeste<br/>Los Alcarrizos</div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a class="social-link" href="https://portafolio-de-gerson.netlify.app/" target="_blank">
+            <span class="l">Portafolio</span>
+            <span class="u">portafolio-de-gerson.netlify.app</span>
+          </a>
+          <a class="social-link" href="https://github.com/Gerson800" target="_blank">
+            <span class="l">GitHub</span>
+            <span class="u">/Gerson800</span>
+          </a>
+          <a class="social-link" href="https://www.linkedin.com/in/gerson-antifis-8994592b9/" target="_blank">
+            <span class="l">LinkedIn</span>
+            <span class="u">/gerson-antifis</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>Ref · GA-2026</span>
+    <span>— Gerson Antifis Amador</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js" defer></script><script>
+    // Intersection-based reveals
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+  </script>
 </body>
 </html>
